@@ -11,6 +11,7 @@ namespace SänkaSkepp
 
             string[,] game = new string[xSize,ySize];
             Random random = new Random();
+
             int x = random.Next(0, 6);
             int y = random.Next(0, 6);
 
