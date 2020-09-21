@@ -6,37 +6,59 @@ namespace SänkaSkepp
     {
         static void Main(string[] args)
         {
-            string[,] game = new string[6,6];
+            int xSize = 6;
+            int ySize = 6;
+
+            string[,] game = new string[xSize,ySize];
             Random random = new Random();
-
-            foreach (var item in game)
-            {
-                
-            }
-
-            for (int i = 0; i < 6; i++)
-            {
-                Console.WriteLine($"{game[i, 0]}{game[i, 1]}{game[i, 2]}{game[i, 3]}{game[i, 4]}{game[i, 5]}");
-            }
             int x = random.Next(0, 6);
             int y = random.Next(0, 6);
 
-            Console.WriteLine("Ange ett x-värde och ett y-värde för att sänka skeppet (notera att första poition är 0,0).");
-            Console.Write("X-värde: ");
-            int xTry = int.Parse(Console.ReadLine());
-            Console.Write("Y-värde: ");
-            int yTry = int.Parse(Console.ReadLine());
-
-            if (xTry==x && yTry==y)
+            for (int i = 0; i < xSize; i++)
             {
-                game[x, y] = " | ";
-                Console.WriteLine("Grattis! Du träffade skeppet!");
+                for (int j = 0; j < ySize; j++)
+                {
+                    game[i, j] = " ~ ";
+                }
             }
-            else
-            {
-                game[xTry, yTry] = " * ";
 
+            while (true)
+            {
+                for (int i = 0; i < xSize; i++)
+                {
+                    for (int j = 0; j < ySize; j++)
+                    {
+                        Console.Write($"{game[i, j]}");
+                    }
+                    Console.Write("\n");
+                }
+
+                Console.WriteLine("Ange ett x-värde och ett y-värde för att sänka skeppet (notera att första poition är 0,0).");
+                Console.Write("X-värde: ");
+                int xTry = int.Parse(Console.ReadLine());
+                Console.Write("Y-värde: ");
+                int yTry = int.Parse(Console.ReadLine());
+
+                if (xTry==x && yTry==y)
+                {
+                    game[x, y] = " | ";
+                    Console.WriteLine("Grattis! Du träffade skeppet!");
+                    for (int i = 0; i < xSize; i++)
+                    {
+                        for (int j = 0; j < ySize; j++)
+                        {
+                            game[i, j] = " ~ ";
+                        }
+                    }
+                    break;
+                }
+                else
+                {
+                    game[xTry, yTry] = " * ";
+                    Console.WriteLine("Miss! Försök igen!");
+                }
             }
+            Console.ReadLine();
         }
     }
 }
